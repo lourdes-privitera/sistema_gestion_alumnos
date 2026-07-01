@@ -1,6 +1,12 @@
+from archivos import (
+    cargar_alumnos, 
+    guardar_alumnos
+)
 from output import(
     mostrar_menu,
-    mostrar_busqueda_alumno
+    mostrar_busqueda_alumno,
+    listar_alumnos,
+    mostrar_estadisticas
 )
 
 from validaciones import (
@@ -9,12 +15,13 @@ from validaciones import (
 
 from alumnos import(
     registrar_alumno,
-    listar_alumnos
+    modificar_alumno,
+    eliminar_alumno
 )
 
 def ejecutar_sistema() -> None:
 
-    lista_alumnos = []
+    lista_alumnos = cargar_alumnos()
 
     programa_activo = True  
 
@@ -31,7 +38,7 @@ def ejecutar_sistema() -> None:
             
         if opcion == 1:
             lista_alumnos = registrar_alumno(lista_alumnos)
-            # guardar_alumnos(lista_alumnos)                             
+            guardar_alumnos(lista_alumnos)                                         
             
         elif opcion == 7:
             print("SALIENDO...")
@@ -45,15 +52,16 @@ def ejecutar_sistema() -> None:
             elif opcion == 3:
                 mostrar_busqueda_alumno(lista_alumnos)
 
-
             elif opcion == 4:
-                print()
+                modificar_alumno(lista_alumnos)
+                guardar_alumnos(lista_alumnos)
 
             elif opcion == 5:
-                print()
+                eliminar_alumno(lista_alumnos)
+                guardar_alumnos(lista_alumnos)
 
             elif opcion == 6:
-                print() 
+                mostrar_estadisticas(lista_alumnos)
 
         else:
             print(f"¡¡¡NO SE PUEDE ACCEDER A LA OPCION {opcion} SIN CARGAR ALUMNOS!!!")
