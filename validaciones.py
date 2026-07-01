@@ -92,4 +92,3 @@ def validar_letras (texto:str)-> bool :
             retorno = False
 
     return retorno
-
