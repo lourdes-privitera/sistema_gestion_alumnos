@@ -1,19 +1,21 @@
+from output import(
+    mostrar_menu,
+    mostrar_busqueda_alumno
+)
+
 from validaciones import (
     validar_opcion
 )
-from inputs import(
-    ingresar_dni,
-    ingresar_nombre_alumno,
-    ingresar_edad,
-    ingresar_nota_final
-)
-from output import(
-    mostrar_menu
+
+from alumnos import(
+    registrar_alumno,
+    listar_alumnos
 )
 
 def ejecutar_sistema() -> None:
 
-    hay_alumnos = False 
+    lista_alumnos = []
+
     programa_activo = True  
 
     while programa_activo:
@@ -28,25 +30,21 @@ def ejecutar_sistema() -> None:
         opcion = int(opcion_texto)
             
         if opcion == 1:
-
-            dni = ingresar_dni()
-            alumno = ingresar_nombre_alumno()
-            edad = ingresar_edad()
-            nota_final = ingresar_nota_final()
-            #datos_alumno = [dni(),alumno(),edad(),nota_final()]                  
-            hay_alumnos = True
+            lista_alumnos = registrar_alumno(lista_alumnos)
+            # guardar_alumnos(lista_alumnos)                             
             
         elif opcion == 7:
             print("SALIENDO...")
             programa_activo = False 
             
-        elif hay_alumnos:         # Solo si ya se cargó alumno
+        elif lista_alumnos:         # Solo si ya se cargó alumno
             
             if opcion == 2:
-                print()
+                listar_alumnos(lista_alumnos)
             
             elif opcion == 3:
-                print()
+                mostrar_busqueda_alumno(lista_alumnos)
+
 
             elif opcion == 4:
                 print()
