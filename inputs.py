@@ -56,6 +56,30 @@ def ingresar_dni() -> int:
     """
     return pedir_numero("Ingrese DNI del alumno: ",6, 0, 99999999)
 
+def pedir_alumno(mensaje:str) -> str:
+    """Solicita y valida una cadena.
+        - Tener al menos 3 caracteres.
+        - Contener únicamente letras y espacios.
+
+    Returns: str: Nombre del alumno validado.
+    """
+
+    texto = input(mensaje)
+
+    while validar_longitud_minima(texto, 3) == False or validar_letras(texto) == False:
+
+        print("----------------------- INVÁLIDO -----------------------")
+        print("Debe contener al menos 3 caracteres y solo letras.")
+        texto = input(mensaje)
+
+    return texto
+
+def ingresar_nombre() -> str:
+    return pedir_alumno("Ingrese nombre del alumno:")
+
+def ingresar_apellido() -> str:
+    return pedir_alumno("Ingrese apellido del alumno:")
+
 def ingresar_edad() -> int:
     """Solicita y valida la edad del alumno.
 
@@ -70,21 +94,18 @@ def ingresar_nota_final() -> int:
     """
     return pedir_numero("Ingrese nota final del alumno: ",1, 0, 10)
 
-def ingresar_nombre_alumno() -> str:
-    """Solicita y valida el nombre del alumno.
-        - Tener al menos 3 caracteres.
-        - Contener únicamente letras y espacios.
+def pedir_datos_alumno() -> dict:
+    """Solicita los datos de un alumno y los devuelve en un diccionario.
 
-    Returns: str: Nombre del alumno validado.
+    Returns: dict: Datos del alumno ingresados por el usuario.
     """
 
-    nombre = input("Ingrese nombre del alumno: ")
+    alumno = {
+        "dni": ingresar_dni(),
+        "nombre": ingresar_nombre(),
+        "apellido": ingresar_apellido(),
+        "edad": ingresar_edad(),
+        "nota": ingresar_nota_final()
+    }
 
-    while validar_longitud_minima(nombre, 3) == False or validar_letras(nombre) == False:
-
-        print("----------------------- INVÁLIDO -----------------------")
-        print("Debe contener al menos 3 caracteres y solo letras.")
-        nombre = input("Reingrese nombre del alumno: ")
-
-    return nombre
-
+    return alumno
